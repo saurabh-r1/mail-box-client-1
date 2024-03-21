@@ -1,11 +1,11 @@
 
-import SignUp from './Authentication/Login/SignUp/SignUp';
+import ToggleLoginSignUp from './Authentication/ToggleLoginSignUp';
 
 
 function App() {
   return (
     <div>
-      <SignUp />
+      <ToggleLoginSignUp />
     </div>
   );
 }
