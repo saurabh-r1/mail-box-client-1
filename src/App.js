@@ -1,9 +1,11 @@
-import './App.css';
+
+import SignUp from './Authentication/Login/SignUp/SignUp';
+
 
 function App() {
   return (
-    <div className="App">
-      <h1>Mail Box Client</h1>
+    <div>
+      <SignUp />
     </div>
   );
 }
