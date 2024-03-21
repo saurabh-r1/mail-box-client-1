@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Login from './Login';
 import SignUp from './SignUp';
+import './Login.css'
 import { Button } from 'react-bootstrap';
 
 const ToggleLoginSignUp = () => {
@@ -18,9 +19,8 @@ const ToggleLoginSignUp = () => {
             { !isLoginPage &&
                 <SignUp />
             }
-        
-        
         </div>
+        
         <div className="button2">
             <Button onClick={toggle}>
               {isLoginPage
