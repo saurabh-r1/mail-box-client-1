@@ -1,0 +1,25 @@
+.box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: transparent;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .editor{
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    background-color:#fff ;
+  }
+  
+  .sendButton{
+    width: 95px;
+    margin: 10px auto;
+    /* padding: 15px;  */
+  }
