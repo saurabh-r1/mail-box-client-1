@@ -5,7 +5,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Compose from "./components/mail/Compose/Compose";
 import Inbox from "./components/mail/Inbox";
 import SentMail from "./components/mail/SentMail";
-import { selectIsLoggedIn } from './Authentication/authSlice';
+import { selectIsLoggedIn } from "./Authentication/authSlice";
 import { useSelector } from "react-redux";
 import ToogleLoginSignUp from "./Authentication/ToggleLoginSignUp";
 import EmailDetail from "./components/mail/EmailDetail";
@@ -21,9 +21,7 @@ function App() {
           <div>
             <div className="row">
               <div className="col-3">
-                
-                  <Sidebar />
-                
+                <Sidebar />
               </div>
               <div className="col-9 mt-0">
                 <Routes>

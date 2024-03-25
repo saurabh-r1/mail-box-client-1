@@ -1,19 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import "./EmailDetail.css"; // Import CSS file for styling
+import "./EmailDetail.css";
 
 const EmailDetail = () => {
   const { id } = useParams();
   const [email, setEmail] = useState(null);
+  const [emailType, setEmailType] = useState(""); // To determine if email is from inbox or sentbox
+
+  const senderEmail = localStorage.getItem("userEmail").replace(/[@.]/g, "");
 
   useEffect(() => {
     const fetchEmail = async () => {
       try {
-        const response = await axios.get(
-          `https://mail-5f4a0-default-rtdb.firebaseio.com/emails/${id}.json`
+        // First try to fetch email from sentbox
+        let response = await axios.get(
+          `https://mail-5f4a0-default-rtdb.firebaseio.com/${senderEmail}sentbox/${id}.json`
         );
-        setEmail(response.data);
+
+        if (response.data) {
+          setEmail(response.data);
+          setEmailType("sent");
+          return; // If email found in sentbox, no need to check inbox
+        }
+
+        // If email not found in sentbox, fetch from inbox
+        response = await axios.get(
+          `https://mail-5f4a0-default-rtdb.firebaseio.com/${senderEmail}inbox/${id}.json`
+        );
+
+        if (response.data) {
+          setEmail(response.data);
+          setEmailType("inbox");
+          return;
+        }
+
+        // If email not found in both sentbox and inbox
+        setEmail(null);
       } catch (error) {
         console.error("Error fetching email details:", error);
       }
@@ -23,7 +46,7 @@ const EmailDetail = () => {
   }, [id]);
 
   if (!email) {
-    return <div className="email-detail-loading">Loading...</div>; // Apply loading class
+    return <div className="email-detail-loading">Loading...</div>; 
   }
 
   return (
@@ -49,6 +72,10 @@ const EmailDetail = () => {
           <span className="email-detail-text">
             {new Date(email.timestamp).toLocaleString()}
           </span>
+        </div>
+        <div className="email-detail-row">
+          <strong className="email-detail-label">Email Type:</strong>{" "}
+          <span className="email-detail-text">{emailType}</span>
         </div>
       </div>
     </div>

@@ -7,6 +7,8 @@ import { Link } from "react-router-dom"
 const SentMails = () => {
   const [emails, setEmails] = useState([]);
 
+  const senderEmail = localStorage.getItem("userEmail").replace(/[@.]/g, "");
+
   useEffect(() => {
     fetchEmails();
   }, []);
@@ -14,7 +16,7 @@ const SentMails = () => {
   const fetchEmails = async () => {
     try {
       const response = await axios.get(
-        "https://mail-5f4a0-default-rtdb.firebaseio.com/emails.json"
+        `https://mail-5f4a0-default-rtdb.firebaseio.com/${senderEmail}sentbox.json`
       );
       const data = response.data;
       const emailList = [];
@@ -35,7 +37,7 @@ const SentMails = () => {
   const handleDeleteEmail = async (id) => {
     try {
       await axios.delete(
-        `https://mail-5f4a0-default-rtdb.firebaseio.com/emails/${id}.json`
+        `https://mail-5f4a0-default-rtdb.firebaseio.com/${senderEmail}sentbox/${id}.json`
       );
 
       setEmails(emails.filter((email) => email.id !== id));
@@ -60,24 +62,24 @@ const SentMails = () => {
             </tr>
           </thead>
           <tbody>
-            {emails.map((email) => (
-              <tr key={email.id} className="email-row" >
-                <td><Link to={`/email/${email.id}`} className="email-link">{email.receiver}</Link ></td>
-                <td><Link to={`/email/${email.id}`} className="email-link">{email.subject}</Link ></td>
-                <td><Link to={`/email/${email.id}`} className="email-link">{email.message}</Link ></td>
-                <td><Link to={`/email/${email.id}`} className="email-link">{new Date(email.timestamp).toLocaleString()}</Link ></td>
-                <td>
-                  <Button
-                    variant="danger"
-                    size="sm"
-                    onClick={() => handleDeleteEmail(email.id)}
-                  >
-                    Delete
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+  {emails.map((email) => (
+    <tr key={email.id} className="email-row">
+      <td><Link to={`/email/${email.id}`} className="email-link">{email.sender}</Link></td>
+      <td><Link to={`/email/${email.id}`} className="email-link">{email.subject}</Link></td>
+      <td><Link to={`/email/${email.id}`} className="email-link">{email.message}</Link></td>
+      <td><Link to={`/email/${email.id}`} className="email-link">{new Date(email.timestamp).toLocaleString()}</Link></td>
+      <td>
+        <Button
+          variant="danger"
+          size="sm"
+          onClick={() => handleDeleteEmail(email.id)}
+        >
+          Delete
+        </Button>
+      </td>
+    </tr>
+  ))}
+</tbody>
         </Table>
       </Card>
     </div>

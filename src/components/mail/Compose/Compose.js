@@ -43,12 +43,21 @@ const Compose = () => {
 
     try {
       const receiverEmail = email.replace(/[@.]/g, '');
+      const senderEmail = senderMail.replace(/[@.]/g, '');
       
       // Send email to Firebase
       await axios.post(
-        `https://mail-5f4a0-default-rtdb.firebaseio.com/${receiverEmail}.json`,
+        `https://mail-5f4a0-default-rtdb.firebaseio.com/${receiverEmail}inbox.json`,
         emailData
       );
+
+
+      await axios.post(
+        `https://mail-5f4a0-default-rtdb.firebaseio.com/${senderEmail}sentbox.json`,
+        emailData
+      );
+
+
 
       // Clear form fields after successful submission
       setEmail("");
