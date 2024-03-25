@@ -1,25 +1,29 @@
 // Inbox.js
 
-import React, {useEffect } from "react";
+import React, { useEffect } from "react";
 import { Button, Card, Table, Badge } from "react-bootstrap";
 import axios from "axios";
 import "./Inbox.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchEmailsSuccess, deleteEmailSuccess, markAsReadSuccess } from "./inboxSlice";
+import {
+  fetchEmailsSuccess,
+  deleteEmailSuccess,
+  markAsReadSuccess,
+} from "./inboxSlice";
 
 const Inbox = () => {
   const dispatch = useDispatch();
-  const emails = useSelector(state => state.inbox.emails);
-  const unreadCount = useSelector(state => state.inbox.unreadCount);
+  const emails = useSelector((state) => state.inbox.emails);
+  const unreadCount = useSelector((state) => state.inbox.unreadCount);
 
   useEffect(() => {
     fetchEmails();
-  },[]);
+  }, []);
 
   const fetchEmails = async () => {
     try {
-      const emails = localStorage.getItem("userEmail").replace(/[@.]/g, '');
+      const emails = localStorage.getItem("userEmail").replace(/[@.]/g, "");
       const response = await axios.get(
         `https://mail-5f4a0-default-rtdb.firebaseio.com/${emails}.json`
       );
@@ -39,7 +43,9 @@ const Inbox = () => {
         }
       }
 
-      dispatch(fetchEmailsSuccess({ emails: emailList.reverse(), unreadCount: unread }));
+      dispatch(
+        fetchEmailsSuccess({ emails: emailList.reverse(), unreadCount: unread })
+      );
     } catch (error) {
       console.error("Error fetching emails:", error);
     }
@@ -94,7 +100,7 @@ const Inbox = () => {
                 <td>
                   <Link
                     to={`/email/${email.id}`}
-                    className={email.read ? "email-link" : "email-link bold"}
+                    className={email.read ? "email-link" : "email-link-bold"}
                     onClick={() => markAsRead(email.id)}
                   >
                     {email.sender}
@@ -103,7 +109,7 @@ const Inbox = () => {
                 <td>
                   <Link
                     to={`/email/${email.id}`}
-                    className={email.read ? "email-link" : "email-link bold"}
+                    className={email.read ? "email-link" : "email-link-bold"}
                     onClick={() => markAsRead(email.id)}
                   >
                     {email.subject}
@@ -112,7 +118,7 @@ const Inbox = () => {
                 <td>
                   <Link
                     to={`/email/${email.id}`}
-                    className={email.read ? "email-link" : "email-link bold"}
+                    className="email-link"
                     onClick={() => markAsRead(email.id)}
                   >
                     {email.message.substring(0, 50)}
@@ -122,7 +128,7 @@ const Inbox = () => {
                 <td>
                   <Link
                     to={`/email/${email.id}`}
-                    className={email.read ? "email-link" : "email-link bold"}
+                    className="timestamp"
                     onClick={() => markAsRead(email.id)}
                   >
                     {new Date(email.timestamp).toLocaleString()}

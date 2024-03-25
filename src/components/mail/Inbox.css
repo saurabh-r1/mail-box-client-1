@@ -81,3 +81,13 @@
   text-decoration: none;
 }
 
+.email-link-bold{
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.timestamp{
+  color: #6e6d6d;
+  text-decoration: none;
+}

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 import './Sidebar.css';
 
 import { logout } from '../../Authentication/authSlice';
@@ -18,8 +18,7 @@ const Sidebar = () => {
     dispatch(logout());
   };
 
-  const location = useLocation();
-  console.log('Current URL:', location.pathname);
+ 
   
   return (
     <nav id="sidebar">
