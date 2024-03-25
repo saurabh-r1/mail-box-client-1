@@ -1,6 +1,6 @@
 // Inbox.js
 
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import { Button, Card, Table, Badge } from "react-bootstrap";
 import axios from "axios";
 import "./Inbox.css";
@@ -15,12 +15,13 @@ const Inbox = () => {
 
   useEffect(() => {
     fetchEmails();
-  }, []);
+  },[]);
 
   const fetchEmails = async () => {
     try {
+      const emails = localStorage.getItem("userEmail").replace(/[@.]/g, '');
       const response = await axios.get(
-        "https://mail-5f4a0-default-rtdb.firebaseio.com/emails.json"
+        `https://mail-5f4a0-default-rtdb.firebaseio.com/${emails}.json`
       );
       const data = response.data;
       const emailList = [];

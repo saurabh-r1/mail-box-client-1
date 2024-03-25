@@ -28,7 +28,7 @@ const Sidebar = () => {
       </NavLink>
       <NavLink to="/"  className="navLink">
         Inbox
-        <button className='count'>{unreadCount}</button> {/* Display unread count */}
+        <button className='count'>{unreadCount}</button> 
       </NavLink>
       <NavLink to="/sent"  className="navLink">
         Sent Mail

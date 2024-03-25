@@ -42,9 +42,11 @@ const Compose = () => {
     };
 
     try {
+      const receiverEmail = email.replace(/[@.]/g, '');
+      
       // Send email to Firebase
       await axios.post(
-        "https://mail-5f4a0-default-rtdb.firebaseio.com/emails.json",
+        `https://mail-5f4a0-default-rtdb.firebaseio.com/${receiverEmail}.json`,
         emailData
       );
 
