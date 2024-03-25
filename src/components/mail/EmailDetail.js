@@ -56,8 +56,8 @@ const EmailDetail = () => {
       </div>
       <div className="email-detail-content">
         <div className="email-detail-row">
-          <strong className="email-detail-label">Sender:</strong>{" "}
-          <span className="email-detail-text">{email.sender}</span>
+          <strong className="email-detail-label">{emailType === "sent" ? "Receiver" : "Sender"}:</strong>{" "}
+          <span className="email-detail-text">{emailType === "sent" ? email.receiver : email.sender}</span>
         </div>
         <div className="email-detail-row">
           <strong className="email-detail-label">Subject:</strong>{" "}

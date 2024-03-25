@@ -62,24 +62,24 @@ const SentMails = () => {
             </tr>
           </thead>
           <tbody>
-  {emails.map((email) => (
-    <tr key={email.id} className="email-row">
-      <td><Link to={`/email/${email.id}`} className="email-link">{email.sender}</Link></td>
-      <td><Link to={`/email/${email.id}`} className="email-link">{email.subject}</Link></td>
-      <td><Link to={`/email/${email.id}`} className="email-link">{email.message}</Link></td>
-      <td><Link to={`/email/${email.id}`} className="email-link">{new Date(email.timestamp).toLocaleString()}</Link></td>
-      <td>
-        <Button
-          variant="danger"
-          size="sm"
-          onClick={() => handleDeleteEmail(email.id)}
-        >
-          Delete
-        </Button>
-      </td>
-    </tr>
-  ))}
-</tbody>
+            {emails.map((email) => (
+              <tr key={email.id} className="email-row" >
+                <td><Link to={`/email/${email.id}`} className="email-link">{email.receiver}</Link ></td>
+                <td><Link to={`/email/${email.id}`} className="email-link">{email.subject}</Link ></td>
+                <td><Link to={`/email/${email.id}`} className="email-link">{email.message}</Link ></td>
+                <td><Link to={`/email/${email.id}`} className="email-link">{new Date(email.timestamp).toLocaleString()}</Link ></td>
+                <td>
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={() => handleDeleteEmail(email.id)}
+                  >
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </Table>
       </Card>
     </div>
