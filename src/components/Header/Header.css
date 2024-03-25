@@ -23,28 +23,16 @@
     align-items: center;
   }
   
-  
-  .searchInput {
-    width: 350px;
-    padding: 8px;
-    margin-right: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  .button {
+ 
+  p {
     padding: 8px 15px;
     border-radius: 5px;
     border: none;
-    background-color: #007bff;
+    background-color: #0000009d;
     color: white;
-    cursor: pointer;
+    /* cursor: pointer; */
   }
   
-  .button:hover {
-    background-color: #0056b3;
-  }
-  
-  .button:last-child {
+  /* p:last-child {
     margin-left: 10px;
-  }
+  } */

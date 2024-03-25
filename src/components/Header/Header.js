@@ -1,17 +1,16 @@
 // Header.js
 import React from "react";
-import {Button, Form} from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
-import { selectIsLoggedIn, logout } from '../../Authentication/authSlice'
+import { useSelector} from "react-redux";
+import { selectIsLoggedIn} from '../../Authentication/authSlice'
 import "./Header.css";
 
 const Header = () => {
-  const dispatch = useDispatch();
+
+
+ const mail = localStorage.getItem('userEmail') || ''
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  const handleLogout = () => {
-    dispatch(logout());
-  };
+ 
 
   return (
     <div className="navbar">
@@ -22,16 +21,9 @@ const Header = () => {
       {isLoggedIn && (
 
       <div className="div2">
-        <Form >
-          <div className="search">
-          <input className="searchInput" type="text" placeholder="Search" />
-          <button className="button">Search</button>
-          </div>
-        </Form>
-
-        <Button variant="danger" className="button" onClick={handleLogout}>
-          Logout
-        </Button>
+        <p className="button">
+          {mail}
+        </p>
       </div>
       )}
     </div>

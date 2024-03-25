@@ -1,0 +1,35 @@
+.email-detail-container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  
+  .email-detail-header {
+    margin-bottom: 20px;
+  }
+  
+  .email-detail-title {
+    color: #333;
+    font-size: 24px;
+  }
+  
+  .email-detail-content {
+    color: #555;
+  }
+  
+  .email-detail-row {
+    margin-bottom: 10px;
+  }
+  
+  .email-detail-label {
+    font-weight: bold;
+  }
+  
+  .email-detail-text {
+    display: inline-block;
+  }
+  

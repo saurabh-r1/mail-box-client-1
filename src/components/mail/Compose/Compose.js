@@ -1,7 +1,5 @@
-// Compose.js
-
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button} from "react-bootstrap";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -9,11 +7,13 @@ import "./Compose.css";
 import axios from "axios";
 
 const Compose = () => {
+  const senderMail = localStorage.getItem("userEmail");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
+  const [messageSent, setMessageSent] = useState(false);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -29,28 +29,36 @@ const Compose = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+
     const messageContent = editorState.getCurrentContent().getPlainText();
 
     // Create email object
     const emailData = {
-      sender: "sender@ifno.com", 
+      sender: senderMail,
       receiver: email,
       subject: subject,
       message: messageContent,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
 
     try {
       // Send email to Firebase
-      await axios.post("https://mail-5f4a0-default-rtdb.firebaseio.com/emails.json", emailData);
+      await axios.post(
+        "https://mail-5f4a0-default-rtdb.firebaseio.com/emails.json",
+        emailData
+      );
 
       // Clear form fields after successful submission
       setEmail("");
       setSubject("");
       setEditorState(EditorState.createEmpty());
 
-      console.log("Email sent successfully");
+      setMessageSent(true); // Set messageSent to true after successful submission
+
+      // Hide the success message after 3 seconds
+      setTimeout(() => {
+        setMessageSent(false);
+      }, 3000);
     } catch (error) {
       console.error("Error sending email:", error);
     }
@@ -58,32 +66,37 @@ const Compose = () => {
 
   return (
     <div className="container">
-      <div className="box">
+      <div className="compose-box">
+        <h1 className="compose-heading">New Message</h1>
+
+        {messageSent && (
+          <alert className="mt-3 successAlert">
+            Message sent successfully
+          </alert>
+        )}
+
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="email">
-            <Form.Label>Email Address:</Form.Label>
             <Form.Control
               type="email"
               value={email}
               onChange={handleEmailChange}
-              placeholder="Enter email"
+              placeholder="To"
               required
             />
           </Form.Group>
 
           <Form.Group controlId="subject">
-            <Form.Label>Subject:</Form.Label>
             <Form.Control
               type="text"
               value={subject}
               onChange={handleSubjectChange}
-              placeholder="Enter subject"
+              placeholder="Subject"
               required
             />
           </Form.Group>
 
           <Form.Group controlId="message">
-            <Form.Label>Message:</Form.Label>
             <div className="editor">
               <Editor
                 placeholder="Enter your message"

@@ -1,25 +1,40 @@
-.box {
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 5px;
-    background-color: transparent;
-  }
-  
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
+.container {
+  /* display: flex; */
+  /* justify-content:flex-start; */
+  /* align-items: center; */
+  margin-top:5%;
+  /* height: 100vh; */
+}
 
-  .editor{
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 5px;
-    background-color:#fff ;
-  }
-  
-  .sendButton{
-    width: 95px;
-    margin: 10px auto;
-    /* padding: 15px;  */
-  }
+.container h1{
+  font-size: large;
+  font-weight: 600;
+}
+
+.compose-box {
+  max-width: 900px;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.compose-heading {
+  margin-bottom: 20px;
+}
+
+.editor {
+  border: 1px solid #ccc;
+  border-radius: 0 0 5px 5px;
+  padding: 10px;
+}
+
+.sendButton {
+  margin-top: 20px;
+}
+
+.successAlert{
+  color: green;
+}

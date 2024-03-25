@@ -1,23 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import './Sidebar.css';
 
+import { logout } from '../../Authentication/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
 const Sidebar = () => {
+  const dispatch = useDispatch();
+  const unreadCount = useSelector(state => state.inbox.unreadCount);
+  
+  useEffect(() => {
+    // You may dispatch an action to fetch the unread count initially when the Sidebar mounts
+    // Dispatch an action to fetch unread count
+  }, [dispatch]);
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   const location = useLocation();
   console.log('Current URL:', location.pathname);
   
   return (
     <nav id="sidebar">
-      <NavLink to="/" className="navLink" >
+      <NavLink to="/compose" className="navLink" >
         Compose
       </NavLink>
-      <NavLink to="/inbox"  className="navLink">
+      <NavLink to="/"  className="navLink">
         Inbox
-        <button className='count'>0</button>
+        <button className='count'>{unreadCount}</button> {/* Display unread count */}
       </NavLink>
       <NavLink to="/sent"  className="navLink">
         Sent Mail
       </NavLink>
+      <button className='logout' onClick={handleLogout}>Logout</button>
     </nav>
   );
 };

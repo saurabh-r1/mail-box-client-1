@@ -8,6 +8,7 @@ import SentMail from "./components/mail/SentMail";
 import { selectIsLoggedIn } from './Authentication/authSlice';
 import { useSelector } from "react-redux";
 import ToogleLoginSignUp from "./Authentication/ToggleLoginSignUp";
+import EmailDetail from "./components/mail/EmailDetail";
 
 function App() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -17,18 +18,19 @@ function App() {
       <Header />
       {isLoggedIn ? (
         <Router>
-          <div className="app">
+          <div>
             <div className="row">
-              <div className="col-2">
+              <div className="col-3">
                 
                   <Sidebar />
                 
               </div>
-              <div className="col-9 mt-4">
+              <div className="col-9 mt-0">
                 <Routes>
-                  <Route path="/" element={<Compose />} />
-                  <Route path="/inbox" element={<Inbox />} />
+                  <Route path="/compose" element={<Compose />} />
+                  <Route path="/" element={<Inbox />} />
                   <Route path="/sent" element={<SentMail />} />
+                  <Route path="/email/:id" element={<EmailDetail />} />
                 </Routes>
               </div>
             </div>
