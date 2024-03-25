@@ -1,6 +1,4 @@
-// Inbox.js
-
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card, Table, Badge } from "react-bootstrap";
 import axios from "axios";
 import "./Inbox.css";
@@ -16,22 +14,32 @@ const Inbox = () => {
   const dispatch = useDispatch();
   const emails = useSelector((state) => state.inbox.emails);
   const unreadCount = useSelector((state) => state.inbox.unreadCount);
-
   const senderEmail = localStorage.getItem("userEmail").replace(/[@.]/g, "");
 
+  // State to keep track of polling interval
+  const [intervalId, setIntervalId] = useState(null);
+
   useEffect(() => {
+    // Fetch emails initially
     fetchEmails();
+
+    // Start polling
+    const id = setInterval(fetchEmails, 2000);
+    setIntervalId(id);
+
+    // Cleanup function to clear interval on unmount
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   const fetchEmails = async () => {
     try {
-      
       const response = await axios.get(
         `https://mail-5f4a0-default-rtdb.firebaseio.com/${senderEmail}inbox.json`
       );
       const data = response.data;
       const emailList = [];
-
       let unread = 0;
 
       for (const key in data) {
