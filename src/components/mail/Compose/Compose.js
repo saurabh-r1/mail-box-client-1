@@ -44,16 +44,18 @@ const Compose = () => {
     try {
       const receiverEmail = email.replace(/[@.]/g, '');
       const senderEmail = senderMail.replace(/[@.]/g, '');
+
+      const url = 'https://mail-5f4a0-default-rtdb.firebaseio.com';
       
-      // Send email to Firebase
+      // Posting to Firebase
       await axios.post(
-        `https://mail-5f4a0-default-rtdb.firebaseio.com/${receiverEmail}inbox.json`,
+        `${url}/${receiverEmail}inbox.json`,
         emailData
       );
 
 
       await axios.post(
-        `https://mail-5f4a0-default-rtdb.firebaseio.com/${senderEmail}sentbox.json`,
+        `${url}/${senderEmail}sentbox.json`,
         emailData
       );
 
@@ -66,10 +68,10 @@ const Compose = () => {
 
       setMessageSent(true); // Set messageSent to true after successful submission
 
-      // Hide the success message after 3 seconds
+      // Hide the success message after 2 seconds
       setTimeout(() => {
         setMessageSent(false);
-      }, 3000);
+      }, 2000);
     } catch (error) {
       console.error("Error sending email:", error);
     }

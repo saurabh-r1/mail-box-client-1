@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { NavLink} from 'react-router-dom';
+import { NavLink, useNavigate} from 'react-router-dom';
 import './Sidebar.css';
 
 import { logout } from '../../Authentication/authSlice';
@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const Sidebar = () => {
   const dispatch = useDispatch();
   const unreadCount = useSelector(state => state.inbox.unreadCount);
+  const navigate = useNavigate ();
   
   useEffect(() => {
     // You may dispatch an action to fetch the unread count initially when the Sidebar mounts
@@ -15,7 +16,9 @@ const Sidebar = () => {
   }, [dispatch]);
 
   const handleLogout = () => {
+    navigate('/')
     dispatch(logout());
+
   };
 
  

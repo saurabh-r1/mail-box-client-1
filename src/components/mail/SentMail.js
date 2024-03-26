@@ -8,6 +8,7 @@ const SentMails = () => {
   const [emails, setEmails] = useState([]);
 
   const senderEmail = localStorage.getItem("userEmail").replace(/[@.]/g, "");
+  const url = 'https://mail-5f4a0-default-rtdb.firebaseio.com'
 
   useEffect(() => {
     fetchEmails();
@@ -16,7 +17,7 @@ const SentMails = () => {
   const fetchEmails = async () => {
     try {
       const response = await axios.get(
-        `https://mail-5f4a0-default-rtdb.firebaseio.com/${senderEmail}sentbox.json`
+        `${url}/${senderEmail}sentbox.json`
       );
       const data = response.data;
       const emailList = [];
@@ -37,7 +38,7 @@ const SentMails = () => {
   const handleDeleteEmail = async (id) => {
     try {
       await axios.delete(
-        `https://mail-5f4a0-default-rtdb.firebaseio.com/${senderEmail}sentbox/${id}.json`
+        `${url}/${senderEmail}sentbox/${id}.json`
       );
 
       setEmails(emails.filter((email) => email.id !== id));

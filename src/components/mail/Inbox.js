@@ -15,6 +15,7 @@ const Inbox = () => {
   const emails = useSelector((state) => state.inbox.emails);
   const unreadCount = useSelector((state) => state.inbox.unreadCount);
   const senderEmail = localStorage.getItem("userEmail").replace(/[@.]/g, "");
+  const url = 'https://mail-5f4a0-default-rtdb.firebaseio.com'
 
   // State to keep track of polling interval
   const [intervalId, setIntervalId] = useState(null);
@@ -36,7 +37,7 @@ const Inbox = () => {
   const fetchEmails = async () => {
     try {
       const response = await axios.get(
-        `https://mail-5f4a0-default-rtdb.firebaseio.com/${senderEmail}inbox.json`
+        `${url}/${senderEmail}inbox.json`
       );
       const data = response.data;
       const emailList = [];
@@ -64,7 +65,7 @@ const Inbox = () => {
   const handleDeleteEmail = async (id) => {
     try {
       await axios.delete(
-        `https://mail-5f4a0-default-rtdb.firebaseio.com/${senderEmail}inbox/${id}.json`
+        `${url}/${senderEmail}inbox/${id}.json`
       );
 
       dispatch(deleteEmailSuccess(id));
@@ -77,7 +78,7 @@ const Inbox = () => {
   const markAsRead = async (id) => {
     try {
       await axios.patch(
-        `https://mail-5f4a0-default-rtdb.firebaseio.com/${senderEmail}inbox/${id}.json`,
+        `${url}/${senderEmail}inbox/${id}.json`,
         { read: true }
       );
 
