@@ -15,7 +15,7 @@ const EmailDetail = () => {
       try {
         // First try to fetch email from sentbox
         let response = await axios.get(
-          `https://mail-5f4a0-default-rtdb.firebaseio.com/${senderEmail}sentbox/${id}.json`
+          `https://mailboxclient-dbc90-default-rtdb.firebaseio.com//${senderEmail}sentbox/${id}.json`
         );
 
         if (response.data) {
@@ -26,7 +26,7 @@ const EmailDetail = () => {
 
         // If email not found in sentbox, fetch from inbox
         response = await axios.get(
-          `https://mail-5f4a0-default-rtdb.firebaseio.com/${senderEmail}inbox/${id}.json`
+          `https://mailboxclient-dbc90-default-rtdb.firebaseio.com//${senderEmail}inbox/${id}.json`
         );
 
         if (response.data) {
@@ -72,10 +72,6 @@ const EmailDetail = () => {
           <span className="email-detail-text">
             {new Date(email.timestamp).toLocaleString()}
           </span>
-        </div>
-        <div className="email-detail-row">
-          <strong className="email-detail-label">Email Type:</strong>{" "}
-          <span className="email-detail-text">{emailType}</span>
         </div>
       </div>
     </div>

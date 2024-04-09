@@ -46,7 +46,7 @@ const SignUp = () => {
 
     setIsLoading(true);
 
-    let url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBLKAbRXVsMIF8DYwJjnSGwYrzgHYy3jiU`;
+    let url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC584wY39oSVJTRlG43GwxU5TzuN2uQvpU`;
 
     try {
       const response = await axios.post(url, {

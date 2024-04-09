@@ -15,7 +15,7 @@ const Inbox = () => {
   const emails = useSelector((state) => state.inbox.emails);
   const unreadCount = useSelector((state) => state.inbox.unreadCount);
   const senderEmail = localStorage.getItem("userEmail").replace(/[@.]/g, "");
-  const url = 'https://mail-5f4a0-default-rtdb.firebaseio.com'
+  const url = 'https://mailboxclient-dbc90-default-rtdb.firebaseio.com/'
 
   // State to keep track of polling interval
   const [intervalId, setIntervalId] = useState(null);
@@ -91,9 +91,7 @@ const Inbox = () => {
   return (
     <div className="inboxContainer">
       <h2 className="inboxTitle">Inbox</h2>
-      <div className="unread-count">
-        Unread: <Badge variant="info">{unreadCount}</Badge>
-      </div>
+      
       <Card className="inboxCard">
         <Table hover responsive>
           <thead>

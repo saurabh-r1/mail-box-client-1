@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Button, Card, Table } from "react-bootstrap";
 import axios from "axios";
-import "./Inbox.css";
+import "../Inbox/Inbox.css";
 import { Link } from "react-router-dom"
 
 const SentMails = () => {
   const [emails, setEmails] = useState([]);
 
   const senderEmail = localStorage.getItem("userEmail").replace(/[@.]/g, "");
-  const url = 'https://mail-5f4a0-default-rtdb.firebaseio.com'
+  const url = 'https://mailboxclient-dbc90-default-rtdb.firebaseio.com/'
 
   useEffect(() => {
     fetchEmails();

@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Compose from "./components/mail/Compose/Compose";
-import Inbox from "./components/mail/Inbox";
-import SentMail from "./components/mail/SentMail";
+import Inbox from "./components/mail/Inbox/Inbox";
+import SentMail from "./components/mail/SentMail/SentMail";
 import { selectIsLoggedIn } from "./Authentication/authSlice";
 import { useSelector } from "react-redux";
 import ToogleLoginSignUp from "./Authentication/ToggleLoginSignUp";
-import EmailDetail from "./components/mail/EmailDetail";
+import EmailDetail from "./components/mail/EmailDetails/EmailDetail";
 
 function App() {
   const isLoggedIn = useSelector(selectIsLoggedIn);

@@ -37,4 +37,9 @@
 
 .successAlert{
   color: green;
+  text-align: center;
+  border: none;
+  background: none;
+  margin: 0;
+  padding: 0;
 }

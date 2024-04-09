@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button} from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -42,24 +42,15 @@ const Compose = () => {
     };
 
     try {
-      const receiverEmail = email.replace(/[@.]/g, '');
-      const senderEmail = senderMail.replace(/[@.]/g, '');
+      const receiverEmail = email.replace(/[@.]/g, "");
+      const senderEmail = senderMail.replace(/[@.]/g, "");
 
-      const url = 'https://mail-5f4a0-default-rtdb.firebaseio.com';
-      
+      const url = "https://mailboxclient-dbc90-default-rtdb.firebaseio.com/";
+
       // Posting to Firebase
-      await axios.post(
-        `${url}/${receiverEmail}inbox.json`,
-        emailData
-      );
+      await axios.post(`${url}/${receiverEmail}inbox.json`, emailData);
 
-
-      await axios.post(
-        `${url}/${senderEmail}sentbox.json`,
-        emailData
-      );
-
-
+      await axios.post(`${url}/${senderEmail}sentbox.json`, emailData);
 
       // Clear form fields after successful submission
       setEmail("");
@@ -83,9 +74,18 @@ const Compose = () => {
         <h1 className="compose-heading">New Message</h1>
 
         {messageSent && (
-          <alert className="mt-3 successAlert">
+          <Alert
+            variant="success"
+            className="mt-3 text-center successAlert"
+            style={{
+              border: "none",
+              background: "none",
+              margin: "0",
+              padding: "0",
+            }}
+          >
             Message sent successfully
-          </alert>
+          </Alert>
         )}
 
         <Form onSubmit={handleSubmit}>

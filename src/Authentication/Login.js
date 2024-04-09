@@ -45,7 +45,7 @@ const Login = () => {
 
     setIsLoading(true);
 
-    let url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBLKAbRXVsMIF8DYwJjnSGwYrzgHYy3jiU`;
+    let url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC584wY39oSVJTRlG43GwxU5TzuN2uQvpU`;
     
 
     try {
@@ -72,7 +72,7 @@ const Login = () => {
 
     try {
       await axios.post(
-        `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyBLKAbRXVsMIF8DYwJjnSGwYrzgHYy3jiU`,
+        `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyC584wY39oSVJTRlG43GwxU5TzuN2uQvpU`,
         {
           email: enteredEmail,
           requestType: "PASSWORD_RESET",
